@@ -18,7 +18,11 @@ PW_DIGITS = {
 }
 
 def get_transactions(bank_num, birthday, password, days=30):
+    bank_num = str(bank_num)
+    birthday = str(birthday)
+    password = str(password)
     hexed_pw = ''
+    days = int(days)
     for p in password:
         hexed_pw += PW_DIGITS[int(p)]
 

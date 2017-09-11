@@ -55,13 +55,13 @@ for trs in transaction_list:
 
 #### Require Args
 
-- `bank_num`: Your account number.
-- `birthday`: Your birthday with birth year(if 1994/10/21, do '941021'), 6 digits.
-- `password`: Your bank account password.
+- `bank_num`: Your account number. (String)
+- `birthday`: Your birthday with birth year(if 1994/10/21, do '941021'), 6 digits. (String)
+- `password`: Your bank account password. (String)
 
 #### Optional Args
 
-- `days`: Days you want to get datas. Default is 30 days
+- `days`: Days you want to get datas. Default is 30 days. (Integer)
 
 #### Return types
 
