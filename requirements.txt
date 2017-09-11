@@ -1,3 +1,5 @@
 bs4
 requests
 python-dateutil
+pillow
+selenium

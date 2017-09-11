@@ -12,7 +12,7 @@ setup(name='simple_bank_korea',
       Crawler with requests/bs4/selenium/PhantomJS for Korea Bank Transctions.
       Currently works with KB""",
       zip_safe=False,
-      setup_requires=['python-dateutil', 'requests', 'bs4', 'selenium'],
-      install_requires=['python-dateutil', 'requests', 'bs4', 'selenium'],
+      setup_requires=['python-dateutil', 'requests', 'bs4', 'selenium', 'pillow'],
+      install_requires=['python-dateutil', 'requests', 'bs4', 'selenium', 'pillow'],
       download_url='https://github.com/beomi/simple_bank_korea/archive/0.2.0.tar.gz',
       )

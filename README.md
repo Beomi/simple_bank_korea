@@ -8,6 +8,7 @@ Requirements:
 - requests
 - python-dateutil
 - selenium
+- pillow (PIL)
 - PhantomJS Binary (get this on [phantomjs.org/download.html](http://phantomjs.org/download.html) )
 
 ## Install
