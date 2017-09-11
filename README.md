@@ -16,9 +16,9 @@ Install package with pip:
 pip install simple_bank_korea
 ```
 
-## KB (Korea Bank)
+## KB (Kookmin Bank)
 
-Currently supports KB(Korea Bank) only.
+Currently supports KB국민은행(Kookmin Bank) only.
 
 ### Before Use
 
