@@ -1,4 +1,4 @@
-# Simple Bank Korea
+# Simple Bank Korea [![PyPI version](https://badge.fury.io/py/simple-bank-korea.svg)](https://badge.fury.io/py/simple-bank-korea)
 
 ## Simplest Transaction Crawler for Korea Banks
 
