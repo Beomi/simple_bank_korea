@@ -32,20 +32,13 @@ def get_keypad_img():
 
         img_url = quics_img.get_attribute('src')
         usemap = quics_img.get_attribute('usemap').replace('#divKeypad','')[:-3]
-        print(img_url, usemap)
         driver.get(img_url)
-        print(driver.save_screenshot('screenshot.png'))
-
-        blank_img = Image.open('blank.gif')
-
+        driver.save_screenshot('screenshot.png')
         screenshot = Image.open('screenshot.png')
-        bbox = screenshot.getbbox()
-        print(bbox)
-        screenshot.crop(box=(0,0,205,336)).save('real.png')
-        # print(response.content)
-        # Image.open(BytesIO(response.content)).save('quics.gif')
+        real = screenshot.crop(box=(0,0,205,336))
+        real.save('real.png')
         driver.quit()
-        return area_hash_list
+        return real, area_hash_list, usemap
     except Exception as e:
         driver.quit()
         print(e)
@@ -58,8 +51,9 @@ def rmsdiff(im1, im2):
                             ) / (float(im1.size[0]) * im1.size[1]))
 
 
-def get_keypad_num_list(img):
+def get_keypad_num_list(img_path):
     # 57x57 box
+    img = Image.open(img_path)
     box_5th = Image.open('assets/5.png')
     box_7th = Image.open('assets/7.png')
     box_8th = Image.open('assets/8.png')
@@ -86,19 +80,23 @@ def get_keypad_num_list(img):
     keypad_num_list = []
 
     for idx, crop in enumerate(crop_list):
-        tmp = crop.save('tmp_{}.png'.format(idx))
+        crop.save('tmp_{}.png'.format(idx))
         tmp_img = Image.open('tmp_{}.png'.format(idx))
         for key, box in box_dict.items():
-            diff = rmsdiff(tmp_img, box)
-            if diff < 13:
-                keypad_num_list += [key]
-            else:
-                print(diff)
+            try:
+                diff = rmsdiff(tmp_img, box)
+                if diff < 13:
+                    keypad_num_list += [key]
+                else:
+                    print(diff)
+            except Exception as e:
+                print(e)
 
     print(keypad_num_list)
 
 
 if __name__ == '__main__':
     get_keypad_img()
+    get_keypad_num_list('real.png')
     # get_keypad_num_list(
     #    img=Image.open('https://obank.kbstar.com/quics?asfilecode=523225&s=1267777411&keytype=3&dummy=4f9e919e9f3e'))
