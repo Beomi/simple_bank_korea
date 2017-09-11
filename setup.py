@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='simple_bank_korea',
-      version='1.0.1',
+      version='0.1.0',
       url='https://github.com/beomi/simple_bank_korea',
       license='MIT',
       author='Junbum Lee',
@@ -14,5 +14,5 @@ setup(name='simple_bank_korea',
       zip_safe=False,
       setup_requires=['python-dateutil', 'requests', 'bs4'],
       install_requires=['python-dateutil', 'requests', 'bs4'],
-      download_url='https://github.com/beomi/simple_bank_korea/archive/1.0.1.tar.gz',
+      download_url='https://github.com/beomi/simple_bank_korea/archive/0.1.0.tar.gz',
       )
