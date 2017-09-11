@@ -7,13 +7,15 @@ Requirements:
 - bs4 (BeautifulSoup4)
 - requests
 - python-dateutil
+- selenium
+- PhantomJS Binary (get this on [phantomjs.org/download.html](http://phantomjs.org/download.html) )
 
 ## Install
 
 Install package with pip:
 
 ```bash
-pip install simple_bank_korea
+pip install -U simple_bank_korea
 ```
 
 ## KB (Kookmin Bank)
@@ -45,6 +47,7 @@ transaction_list = get_transactions(
         birthday='941021',
         password='5432',
         # days=30, # Optional, default is 30
+        # PHANTOM_PATH='/Users/beomi/bin/phantomjs' # Optional, default is 'phantomjs' only.
     )
 
 for trs in transaction_list:
@@ -62,6 +65,9 @@ for trs in transaction_list:
 #### Optional Args
 
 - `days`: Days you want to get datas. Default is 30 days. (Integer)
+- `PHANTOM_PATH`: Your PhantomJS Binary file Location. 
+  Default is 'phantomjs', expecting registered in PATH. 
+  (But writing your own absolute path is suggested.)
 
 #### Return types
 
