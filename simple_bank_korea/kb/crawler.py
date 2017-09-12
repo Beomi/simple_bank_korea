@@ -79,7 +79,7 @@ def get_transactions(bank_num, birthday, password, days=30, PHANTOM_PATH='phanto
         ('\uBE60\uB978\uC870\uD68C', 'Y'),
         ('\uC870\uD68C\uACC4\uC88C', bank_num),
         ('\uBE44\uBC00\uBC88\uD638', password),
-        ('USEYN_CHECK_NAME_49bf17a91800', 'Y'),
+        ('USEYN_CHECK_NAME_{}'.format(KEYMAP), 'Y'),
         ('\uAC80\uC0C9\uAD6C\uBD84', '2'),
         ('\uC8FC\uBBFC\uC0AC\uC5C5\uC790\uBC88\uD638', birthday),
         ('\uC870\uD68C\uC2DC\uC791\uB144', month_before_year),

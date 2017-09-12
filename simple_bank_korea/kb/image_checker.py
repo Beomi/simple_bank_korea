@@ -20,8 +20,16 @@ def get_keypad_img(PHANTOM_PATH='phantomjs'):
     driver.set_window_size('1920', '1080')
     driver.implicitly_wait(10)
     driver.get('https://obank.kbstar.com/quics?page=C025255&cc=b028364:b028702&QSL=F')
-    JSESSIONID = driver.get_cookie('JSESSIONID').get('value')
-    QSID = driver.get_cookie('QSID').get('value')
+    if driver.get_cookie('JSESSIONID'):
+        JSESSIONID = driver.get_cookie('JSESSIONID').get('value')
+    else:
+        JSESSIONID = ''
+        print('no JSESSIONID')
+    if driver.get_cookie('QSID'):
+        QSID = driver.get_cookie('QSID').get('value')
+        print('no QSID')
+    else:
+        QSID = ''
     KEYPAD_USEYN = driver.find_element_by_css_selector('input[id*="KEYPAD_USEYN"]').get_attribute('value')
     quics_img = driver.find_element_by_css_selector('img[src*="quics"]')
     area_list = driver.find_elements_by_css_selector('map > area')
@@ -123,5 +131,5 @@ def _get_keypad_num_list():
 
 
 if __name__ == '__main__':
-    print(get_keypad_img('phantomjs')) # PATH to phantomjs
+    print(get_keypad_img('phantomjs'))  # PATH to phantomjs
     print(_get_keypad_num_list())
