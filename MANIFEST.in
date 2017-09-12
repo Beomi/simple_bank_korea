@@ -3,3 +3,5 @@ include LICENSE
 include README.md
 
 include requirements.txt
+
+include simple_bank_korea/kb/assets/*
