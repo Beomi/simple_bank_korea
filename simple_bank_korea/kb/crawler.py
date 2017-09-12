@@ -2,12 +2,13 @@ import requests
 from bs4 import BeautifulSoup as bs
 import datetime
 from dateutil import parser
+import os
 
 from .image_checker import get_keypad_img
 
 
-def get_transactions(bank_num, birthday, password, days=30, PHANTOM_PATH='phantomjs'):
-    VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH)
+def get_transactions(bank_num, birthday, password, days=30, PHANTOM_PATH='phantomjs', LOG_PATH=os.path.devnull):
+    VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
 
     PW_DIGITS = VIRTUAL_KEYPAD_INFO['PW_DIGITS']
     KEYMAP = VIRTUAL_KEYPAD_INFO['KEYMAP']

@@ -13,10 +13,10 @@ if not os.path.exists(os.path.join(BASE_DIR, 'tmp')):
     os.makedirs(os.path.join(BASE_DIR, 'tmp'))
 
 
-def get_keypad_img(PHANTOM_PATH='phantomjs'):
+def get_keypad_img(PHANTOM_PATH, LOG_PATH):
     area_hash_list = []
     area_pattern = re.compile("'(\w+)'")
-    driver = webdriver.PhantomJS(PHANTOM_PATH)
+    driver = webdriver.PhantomJS(executable_path=PHANTOM_PATH, service_log_path=LOG_PATH)
     driver.set_window_size('1920', '1080')
     driver.implicitly_wait(10)
     driver.get('https://obank.kbstar.com/quics?page=C025255&cc=b028364:b028702&QSL=F')

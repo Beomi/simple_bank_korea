@@ -48,7 +48,8 @@ transaction_list = get_transactions(
         birthday='941021',
         password='5432',
         # days=30, # Optional, default is 30
-        # PHANTOM_PATH='/Users/beomi/bin/phantomjs' # Optional, default is 'phantomjs' only.
+        # PHANTOM_PATH='/Users/beomi/bin/phantomjs', # Optional, default is 'phantomjs' only.
+        # LOG_PATH='/Users/beomi/phantom.log' # Optional, default is os.path.devnull (no log)
     )
 
 for trs in transaction_list:
@@ -69,6 +70,7 @@ for trs in transaction_list:
 - `PHANTOM_PATH`: Your PhantomJS Binary file Location. 
   Default is 'phantomjs', expecting registered in PATH. 
   (But writing your own absolute path is suggested.)
+- `LOG_PATH`: Path for phantomjs log file. Default is no logging.
 
 #### Return types
 
