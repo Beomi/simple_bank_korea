@@ -6,8 +6,10 @@ import math, operator
 from functools import reduce
 import re
 import os
+import platform
+import tempfile
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 if not os.path.exists(os.path.join(BASE_DIR, 'tmp')):
     os.makedirs(os.path.join(BASE_DIR, 'tmp'))
