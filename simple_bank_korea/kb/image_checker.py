@@ -9,6 +9,8 @@ import os
 import platform
 import tempfile
 
+PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 BASE_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 if not os.path.exists(os.path.join(BASE_DIR, 'tmp')):
@@ -93,11 +95,11 @@ def rmsdiff(im1, im2):
 def _get_keypad_num_list():
     # 57x57 box
     img = Image.open(os.path.join(BASE_DIR, 'tmp', 'real.png'))
-    box_5th = Image.open(os.path.join(BASE_DIR, 'assets', '5.png'))
-    box_7th = Image.open(os.path.join(BASE_DIR, 'assets', '7.png'))
-    box_8th = Image.open(os.path.join(BASE_DIR, 'assets', '8.png'))
-    box_9th = Image.open(os.path.join(BASE_DIR, 'assets', '9.png'))
-    box_0th = Image.open(os.path.join(BASE_DIR, 'assets', '0.png'))
+    box_5th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '5.png'))
+    box_7th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '7.png'))
+    box_8th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '8.png'))
+    box_9th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '9.png'))
+    box_0th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '0.png'))
 
     box_dict = {
         5: box_5th,
