@@ -84,3 +84,8 @@ for trs in transaction_list:
 - `transaction_by`: str
 
 
+## Update Log
+
+#### v0.2.7 (2017-09-18)
+
+- Add caching strategy (using temp folder with saving touch-keys)

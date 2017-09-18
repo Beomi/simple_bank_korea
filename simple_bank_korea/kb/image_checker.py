@@ -11,10 +11,10 @@ import tempfile
 
 PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-BASE_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
+TMP_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
-if not os.path.exists(os.path.join(BASE_DIR, 'tmp')):
-    os.makedirs(os.path.join(BASE_DIR, 'tmp'))
+if not os.path.exists(os.path.join(TMP_DIR, 'tmp')):
+    os.makedirs(os.path.join(TMP_DIR, 'tmp'))
 
 
 def get_keypad_img(PHANTOM_PATH, LOG_PATH):
@@ -31,9 +31,9 @@ def get_keypad_img(PHANTOM_PATH, LOG_PATH):
         print('no JSESSIONID')
     if driver.get_cookie('QSID'):
         QSID = driver.get_cookie('QSID').get('value')
-        print('no QSID')
     else:
         QSID = ''
+        print('no QSID')
     KEYPAD_USEYN = driver.find_element_by_css_selector('input[id*="KEYPAD_USEYN"]').get_attribute('value')
     quics_img = driver.find_element_by_css_selector('img[src*="quics"]')
     area_list = driver.find_elements_by_css_selector('map > area')
@@ -46,10 +46,10 @@ def get_keypad_img(PHANTOM_PATH, LOG_PATH):
     img_url = quics_img.get_attribute('src')
     keymap = quics_img.get_attribute('usemap').replace('#divKeypad', '')[:-3]
     driver.get(img_url)
-    driver.save_screenshot(os.path.join(BASE_DIR, 'tmp', 'screenshot.png'))
-    screenshot = Image.open(os.path.join(BASE_DIR, 'tmp', 'screenshot.png'))
+    driver.save_screenshot(os.path.join(TMP_DIR, 'tmp', 'screenshot.png'))
+    screenshot = Image.open(os.path.join(TMP_DIR, 'tmp', 'screenshot.png'))
     real = screenshot.crop(box=(0, 0, 205, 336))
-    real.save(os.path.join(BASE_DIR, 'tmp', 'real.png'))
+    real.save(os.path.join(TMP_DIR, 'tmp', 'real.png'))
     driver.quit()
 
     # Get list
@@ -94,7 +94,7 @@ def rmsdiff(im1, im2):
 
 def _get_keypad_num_list():
     # 57x57 box
-    img = Image.open(os.path.join(BASE_DIR, 'tmp', 'real.png'))
+    img = Image.open(os.path.join(TMP_DIR, 'tmp', 'real.png'))
     box_5th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '5.png'))
     box_7th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '7.png'))
     box_8th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '8.png'))
@@ -121,8 +121,8 @@ def _get_keypad_num_list():
     keypad_num_list = []
 
     for idx, crop in enumerate(crop_list):
-        crop.save(os.path.join(BASE_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
-        tmp_img = Image.open(os.path.join(BASE_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
+        crop.save(os.path.join(TMP_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
+        tmp_img = Image.open(os.path.join(TMP_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
         for key, box in box_dict.items():
             try:
                 diff = rmsdiff(tmp_img, box)
