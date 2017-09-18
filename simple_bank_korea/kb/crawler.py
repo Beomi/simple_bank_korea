@@ -134,7 +134,7 @@ def get_transactions(bank_num, birthday, password, days=30, PHANTOM_PATH='phanto
     else:
         print('Session Expired! Get new touch keys..')
         NEW_VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
-        fp = open(VIRTUAL_KEYPAD_INFO_JSON)
+        fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
         json.dump(NEW_VIRTUAL_KEYPAD_INFO, fp)
         fp.close()
         return _get_transactions(NEW_VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH)

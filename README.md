@@ -86,6 +86,7 @@ for trs in transaction_list:
 
 ## Update Log
 
-#### v0.2.7 (2017-09-18)
+#### v0.2.8 (2017-09-18)
 
 - Add caching strategy (using temp folder with saving touch-keys)
+- Fix typo in v0.2.7
