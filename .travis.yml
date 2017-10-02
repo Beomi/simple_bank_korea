@@ -4,6 +4,6 @@ python:
 script:
   - python3 tests.py
 before_install:
-  - pip install --user codecov
+  - pip install codecov
 after_success:
   - codecov
