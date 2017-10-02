@@ -17,7 +17,7 @@ if not os.path.exists(os.path.join(TMP_DIR, 'tmp')):
     os.makedirs(os.path.join(TMP_DIR, 'tmp'))
 
 
-def get_keypad_img(PHANTOM_PATH, LOG_PATH):
+def get_keypad_img(PHANTOM_PATH, LOG_PATH=os.path.devnull):
     area_hash_list = []
     area_pattern = re.compile("'(\w+)'")
     driver = webdriver.PhantomJS(executable_path=PHANTOM_PATH, service_log_path=LOG_PATH)
