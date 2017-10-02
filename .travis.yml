@@ -3,3 +3,7 @@ python:
   - 3.6
 script:
   - python3 tests.py
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
