@@ -6,4 +6,4 @@ script:
 before_install:
   - pip install codecov
 after_success:
-  - codecov
+  - codecov --token=$CODECOV_TOKEN
