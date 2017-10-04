@@ -4,6 +4,9 @@ python:
 script:
   - python3 tests.py
 before_install:
-  - pip install codecov
+  - pip install codecov 
+  - pip install coverage
 after_success:
+  - coverage run tests.py
   - codecov --token=$CODECOV_TOKEN
+  
