@@ -10,7 +10,7 @@ Requirements:
 - python-dateutil
 - selenium
 - pillow (PIL)
-- PhantomJS Binary (get this on [phantomjs.org/download.html](http://phantomjs.org/download.html) )
+- PhantomJS Binary (Automatically Download, but `libfontconfig` is dependency on Linux)
 
 ## Install
 
@@ -70,7 +70,7 @@ for trs in transaction_list:
 - `days`: Days you want to get datas. Default is 30 days. (Integer)
 - `PHANTOM_PATH`: Your PhantomJS Binary file Location. 
   Default is 'phantomjs', expecting registered in PATH. 
-  (But writing your own absolute path is suggested.)
+  (If `phantomjs` is not in PATH, automatically download)
 - `LOG_PATH`: Path for phantomjs log file. Default is no logging.
 
 #### Return types
@@ -86,6 +86,10 @@ for trs in transaction_list:
 
 
 ## Update Log
+
+#### v0.2.9 (2017-11-11)
+
+- Download PhantomJS Binary if `phantomjs` is not in PATH
 
 #### v0.2.8 (2017-09-18)
 
