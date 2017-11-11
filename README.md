@@ -87,6 +87,10 @@ for trs in transaction_list:
 
 ## Update Log
 
+#### v0.2.10 (2017-11-11)
+
+- Hot-fix: implicitly import to explicit relevant import to prevent `ImportError`
+
 #### v0.2.9 (2017-11-11)
 
 - Download PhantomJS Binary if `phantomjs` is not in PATH
