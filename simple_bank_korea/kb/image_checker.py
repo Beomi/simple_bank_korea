@@ -7,7 +7,9 @@ from functools import reduce
 import re
 import os
 
-from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR, PACKAGE_DIR
+from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR
+
+CURRENT_PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def get_keypad_img(PHANTOM_PATH, LOG_PATH=os.path.devnull):
     area_hash_list = []
@@ -87,11 +89,11 @@ def rmsdiff(im1, im2):
 def _get_keypad_num_list():
     # 57x57 box
     img = Image.open(os.path.join(TMP_DIR, 'tmp', 'real.png'))
-    box_5th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '5.png'))
-    box_7th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '7.png'))
-    box_8th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '8.png'))
-    box_9th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '9.png'))
-    box_0th = Image.open(os.path.join(PACKAGE_DIR, 'assets', '0.png'))
+    box_5th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '5.png'))
+    box_7th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '7.png'))
+    box_8th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '8.png'))
+    box_9th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '9.png'))
+    box_0th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '0.png'))
 
     box_dict = {
         5: box_5th,

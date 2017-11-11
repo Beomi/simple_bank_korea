@@ -8,8 +8,6 @@ import requests
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 
-PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 TMP_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 
