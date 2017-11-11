@@ -7,9 +7,10 @@ from functools import reduce
 import re
 import os
 
-from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR
+from ..libcheck.phantomjs_checker import TMP_DIR
 
 CURRENT_PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 def get_keypad_img(PHANTOM_PATH, LOG_PATH=os.path.devnull):
     area_hash_list = []

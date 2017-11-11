@@ -6,8 +6,7 @@ import os
 import json
 
 from .image_checker import get_keypad_img
-
-from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
+from ..libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
 
 
 def get_transactions(bank_num, birthday, password, days=30,
