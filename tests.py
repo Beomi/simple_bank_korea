@@ -3,6 +3,7 @@ import os
 
 from simple_bank_korea.kb.crawler import get_transactions
 from simple_bank_korea.kb.image_checker import get_keypad_img
+from simple_bank_korea.libcheck.phantomjs_checker import get_phantomjs_path
 
 
 class KookminBankTestCase(unittest.TestCase):
@@ -28,6 +29,20 @@ class KookminBankTestCase(unittest.TestCase):
             password=self.password,
         )
         self.assertNotEqual(len(transactions), 0, 'Transaction list is empty!')
+
+
+class LibcheckTestCase(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def test_get_phantomjs_path_if_phantomjs_in_PATH(self):
+        phantomjs_path = get_phantomjs_path()
+        self.assertEqual(phantomjs_path, 'phantomjs', 'PhantomJS Does not in PATH.')
+
+    def test_get_phantomjs_path_if_phantomjs_not_in_PATH(self):
+        os.environ['phantomjs'] = 'overriding_this'
+        phantomjs_path = get_phantomjs_path()
+        self.assertTrue('phantomjs' in phantomjs_path, 'Download PhantomJS Failed.')
 
 
 if __name__ == '__main__':
