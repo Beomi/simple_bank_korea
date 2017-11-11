@@ -6,16 +6,8 @@ import math, operator
 from functools import reduce
 import re
 import os
-import platform
-import tempfile
 
-PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-TMP_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
-
-if not os.path.exists(os.path.join(TMP_DIR, 'tmp')):
-    os.makedirs(os.path.join(TMP_DIR, 'tmp'))
-
+from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR, PACKAGE_DIR
 
 def get_keypad_img(PHANTOM_PATH, LOG_PATH=os.path.devnull):
     area_hash_list = []

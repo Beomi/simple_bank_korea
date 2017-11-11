@@ -6,10 +6,13 @@ import os
 import json
 
 from .image_checker import get_keypad_img
-from .image_checker import TMP_DIR
+
+from simple_bank_korea.libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
 
 
-def get_transactions(bank_num, birthday, password, days=30, PHANTOM_PATH='phantomjs', LOG_PATH=os.path.devnull):
+def get_transactions(bank_num, birthday, password, days=30,
+                     PHANTOM_PATH=get_phantomjs_path(),
+                     LOG_PATH=os.path.devnull):
     def _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH):
         PW_DIGITS = VIRTUAL_KEYPAD_INFO['PW_DIGITS']
         KEYMAP = VIRTUAL_KEYPAD_INFO['KEYMAP']
@@ -145,6 +148,5 @@ if __name__ == '__main__':
     birthday = input('Input your birthday(ex: 941024): ')
     password = input('Input your pw(4 digits): ')
     days = int(input('How many days do you want to know?(days): '))
-
     trs = get_transactions(bank_num, birthday, password, days)
     print(trs)
