@@ -10,8 +10,10 @@ from ..libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
 
 
 def get_transactions(bank_num, birthday, password, days=30,
-                     PHANTOM_PATH=get_phantomjs_path(),
+                     PHANTOM_PATH=None,
                      LOG_PATH=os.path.devnull):
+    if not PHANTOM_PATH:
+        PHANTOM_PATH = get_phantomjs_path()
     def _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH):
         PW_DIGITS = VIRTUAL_KEYPAD_INFO['PW_DIGITS']
         KEYMAP = VIRTUAL_KEYPAD_INFO['KEYMAP']
