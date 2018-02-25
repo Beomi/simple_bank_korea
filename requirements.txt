@@ -1,5 +1,5 @@
 bs4
-requests
-python-dateutil
-pillow
-selenium
+"requests<2.19"
+"python-dateutil<2.7"
+"pillow<5"
+"selenium<3.7"

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='simple_bank_korea',
-      version='0.2.10',
+      version='0.2.11',
       url='https://github.com/beomi/simple_bank_korea',
       license='MIT',
       author='Junbum Lee',
@@ -12,8 +12,20 @@ setup(name='simple_bank_korea',
       Crawler with requests/bs4/selenium/PhantomJS for Korea Bank Transctions.
       Currently supports Kookmin Bank""",
       zip_safe=False,
-      setup_requires=['python-dateutil', 'requests', 'bs4', 'selenium', 'pillow'],
-      install_requires=['python-dateutil', 'requests', 'bs4', 'selenium', 'pillow'],
-      download_url='https://github.com/beomi/simple_bank_korea/archive/0.2.10.tar.gz',
+      setup_requires=[
+            "bs4",
+            "requests<2.19",
+            "python-dateutil<2.7",
+            "pillow<5",
+            "selenium<3.7"
+      ],
+      install_requires=[
+            "bs4",
+            "requests<2.19",
+            "python-dateutil<2.7",
+            "pillow<5",
+            "selenium<3.7"
+      ],
+      download_url='https://github.com/beomi/simple_bank_korea/archive/0.2.11.tar.gz',
       include_package_data = True,
       )
