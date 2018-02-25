@@ -2,12 +2,14 @@ from PIL import Image
 from PIL import ImageChops
 from selenium import webdriver
 
+import platform
+import tempfile
 import math, operator
 from functools import reduce
 import re
 import os
 
-from ..libcheck.phantomjs_checker import TMP_DIR
+TMP_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 CURRENT_PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 
