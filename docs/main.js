@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
             "BIRTHDAY": form.birthday.value,
             "PASSWORD": form.password.value
         }).then(function (res) {
+            if (res.data.error) {
+                alert(res.data.error)
+                break;
+            }
             return res.data
         }).then(function (valueList) {
             //{date: "2018-03-01T12:59:13", amount: -23500, balance: 951156, transaction_by: "N_롯데쇼핑("}
