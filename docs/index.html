@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Bank Korea API Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <div class="container" style="margin-top: 20px">
+        <h1>Simple Bank Korea API Demo</h1>
+        <form id="demoForm" autocomplete="off">
+            <div class="form-group">
+                <label class="form-control form-control-lg">
+                    계좌번호:
+                    <input type="text" name="bank_num"
+                           placeholder="ex) 47380204123456"
+                           autocomplete="off"
+                    >
+                </label>
+                <label class="form-control form-control-lg">
+                    생년월일 6자리:
+                    <input type="text" name="birthday" maxlength="6"
+                           placeholder="ex) 910822"
+                           autocomplete="off">
+                </label>
+                <label class="form-control form-control-lg">
+                    비밀번호 4자리:
+                    <input type="password" name="password" maxlength="4"
+                           placeholder="****"
+                           autocomplete="off">
+                </label>
+                <button id="submitButton" type="submit" class="btn btn-success">
+                    Query!
+                </button>
+            </div>
+        </form>
+        <div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Where/Who</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Balance</th>
+                </tr>
+                </thead>
+                <tbody id="resultBox">
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
