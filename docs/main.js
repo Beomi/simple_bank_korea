@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 var _amount = '<td>' + value.amount + '</td>'
                 var _balance = '<td>' + value.balance + '</td>'
                 var _transaction_by = '<td>' + value.transaction_by + '</td>'
-                var _row = _date + _amount + _balance + _transaction_by
+                var _row = _date + _transaction_by + _amount + _balance
                 html += '<tr>' + _row + '</tr>'
             })
             return html
