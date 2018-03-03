@@ -11,9 +11,11 @@ from ..libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
 
 def get_transactions(bank_num, birthday, password, days=30,
                      PHANTOM_PATH=None,
-                     LOG_PATH=os.path.devnull):
+                     LOG_PATH=os.path.devnull,
+                     cache=False):
     if not PHANTOM_PATH:
         PHANTOM_PATH = get_phantomjs_path()
+
     def _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH):
         PW_DIGITS = VIRTUAL_KEYPAD_INFO['PW_DIGITS']
         KEYMAP = VIRTUAL_KEYPAD_INFO['KEYMAP']
@@ -121,16 +123,20 @@ def get_transactions(bank_num, birthday, password, days=30,
                 transaction_list.append({**detail, **tmp})
         return transaction_list
 
+    # Caching
     VIRTUAL_KEYPAD_INFO_JSON = os.path.join(TMP_DIR, 'kb_{}.json'.format(bank_num))
-    if os.path.exists(VIRTUAL_KEYPAD_INFO_JSON):
-        fp = open(VIRTUAL_KEYPAD_INFO_JSON)
-        VIRTUAL_KEYPAD_INFO = json.load(fp)
-        fp.close()
+    if cache:
+        if os.path.exists(VIRTUAL_KEYPAD_INFO_JSON):
+            fp = open(VIRTUAL_KEYPAD_INFO_JSON)
+            VIRTUAL_KEYPAD_INFO = json.load(fp)
+            fp.close()
+        else:
+            VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
+            fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
+            json.dump(VIRTUAL_KEYPAD_INFO, fp)
+            fp.close()
     else:
-        VIRTUAL_KEYPAD_INFO = get_keypad_img(TMP_DIR, LOG_PATH)
-        fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
-        json.dump(VIRTUAL_KEYPAD_INFO, fp)
-        fp.close()
+        VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
 
     result = _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH)
     if result:
@@ -138,9 +144,10 @@ def get_transactions(bank_num, birthday, password, days=30,
     else:
         print('Session Expired! Get new touch keys..')
         NEW_VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
-        fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
-        json.dump(NEW_VIRTUAL_KEYPAD_INFO, fp)
-        fp.close()
+        if cache:
+            fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
+            json.dump(NEW_VIRTUAL_KEYPAD_INFO, fp)
+            fp.close()
         return _get_transactions(NEW_VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH)
 
 

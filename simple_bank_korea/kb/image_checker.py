@@ -1,3 +1,5 @@
+from io import StringIO, BytesIO
+import base64
 from PIL import Image
 from PIL import ImageChops
 from selenium import webdriver
@@ -8,7 +10,6 @@ import re
 import os
 
 from ..libcheck.phantomjs_checker import TMP_DIR
-
 CURRENT_PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -41,14 +42,12 @@ def get_keypad_img(PHANTOM_PATH, LOG_PATH=os.path.devnull):
     img_url = quics_img.get_attribute('src')
     keymap = quics_img.get_attribute('usemap').replace('#divKeypad', '')[:-3]
     driver.get(img_url)
-    driver.save_screenshot(os.path.join(TMP_DIR, 'tmp', 'screenshot.png'))
-    screenshot = Image.open(os.path.join(TMP_DIR, 'tmp', 'screenshot.png'))
+    screenshot = Image.open(BytesIO(driver.get_screenshot_as_png()))
     real = screenshot.crop(box=(0, 0, 205, 336))
-    real.save(os.path.join(TMP_DIR, 'tmp', 'real.png'))
     driver.quit()
 
     # Get list
-    num_sequence = _get_keypad_num_list()
+    num_sequence = _get_keypad_num_list(real)
 
     PW_DIGITS = {}
     # FIXED
@@ -87,9 +86,8 @@ def rmsdiff(im1, im2):
                             ) / (float(im1.size[0]) * im1.size[1]))
 
 
-def _get_keypad_num_list():
+def _get_keypad_num_list(img):
     # 57x57 box
-    img = Image.open(os.path.join(TMP_DIR, 'tmp', 'real.png'))
     box_5th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '5.png'))
     box_7th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '7.png'))
     box_8th = Image.open(os.path.join(CURRENT_PACKAGE_DIR, 'assets', '8.png'))
@@ -116,16 +114,13 @@ def _get_keypad_num_list():
     keypad_num_list = []
 
     for idx, crop in enumerate(crop_list):
-        crop.save(os.path.join(TMP_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
-        tmp_img = Image.open(os.path.join(TMP_DIR, 'tmp', 'tmp_{}.png'.format(idx)))
         for key, box in box_dict.items():
             try:
-                diff = rmsdiff(tmp_img, box)
+                diff = rmsdiff(crop, box)
                 if diff < 13:
                     keypad_num_list += [key]
             except Exception as e:
                 print(e)
-
     return keypad_num_list
 
 
