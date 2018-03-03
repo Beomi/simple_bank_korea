@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
         }).then(function (res) {
             if (res.data.error) {
                 alert(res.data.error)
-                break;
             }
             return res.data
         }).then(function (valueList) {
