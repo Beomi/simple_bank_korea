@@ -10,9 +10,11 @@ from ..libcheck.phantomjs_checker import TMP_DIR, get_phantomjs_path
 
 
 def get_transactions(bank_num, birthday, password, days=30,
-                     PHANTOM_PATH=get_phantomjs_path(),
+                     PHANTOM_PATH=None,
                      LOG_PATH=os.path.devnull):
-    def _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH):
+    if not PHANTOM_PATH:
+        PHANTOM_PATH = get_phantomjs_path()
+    def _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH):
         PW_DIGITS = VIRTUAL_KEYPAD_INFO['PW_DIGITS']
         KEYMAP = VIRTUAL_KEYPAD_INFO['KEYMAP']
         JSESSIONID = VIRTUAL_KEYPAD_INFO['JSESSIONID']
@@ -125,12 +127,12 @@ def get_transactions(bank_num, birthday, password, days=30,
         VIRTUAL_KEYPAD_INFO = json.load(fp)
         fp.close()
     else:
-        VIRTUAL_KEYPAD_INFO = get_keypad_img(PHANTOM_PATH, LOG_PATH)
+        VIRTUAL_KEYPAD_INFO = get_keypad_img(TMP_DIR, LOG_PATH)
         fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
         json.dump(VIRTUAL_KEYPAD_INFO, fp)
         fp.close()
 
-    result = _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH)
+    result = _get_transactions(VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH)
     if result:
         return result
     else:
@@ -139,7 +141,7 @@ def get_transactions(bank_num, birthday, password, days=30,
         fp = open(VIRTUAL_KEYPAD_INFO_JSON, 'w+')
         json.dump(NEW_VIRTUAL_KEYPAD_INFO, fp)
         fp.close()
-        return _get_transactions(NEW_VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, PHANTOM_PATH, LOG_PATH)
+        return _get_transactions(NEW_VIRTUAL_KEYPAD_INFO, bank_num, birthday, password, days, LOG_PATH)
 
 
 if __name__ == '__main__':
