@@ -11,7 +11,10 @@ from selenium.common.exceptions import WebDriverException
 TMP_DIR = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 
-def get_phantomjs_path():
+def get_phantomjs_path(phantomjs_path=None):
+    # if phantomjs_path is provided, use it as PATH
+    if phantomjs_path:
+        return phantomjs_path
     # Download Phantomjs Binary if not exist
     def download_phantomjs(filename):
         # Download PhantomJS Binary
