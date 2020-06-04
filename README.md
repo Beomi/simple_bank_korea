@@ -87,20 +87,26 @@ for trs in transaction_list:
 
 ## Update Log
 
-#### v0.2.13 (2020-06-04)
+#### 0.2.14 (2020-06-04)
+
+- Fix bugs #4: (downloaded) phantomJS permission error
+- 
+
+#### 0.2.13 (2020-06-04)
 
 - Fix bugs when downloading phantomjs.
     - Fix affects on Linux and macOS only.
+- Add Guide(OS, Progress) when dowloading phantomjs.
 
-#### v0.2.10 (2017-11-11)
+#### 0.2.10 (2017-11-11)
 
 - Hot-fix: implicitly import to explicit relevant import to prevent `ImportError`
 
-#### v0.2.9 (2017-11-11)
+#### 0.2.9 (2017-11-11)
 
 - Download PhantomJS Binary if `phantomjs` is not in PATH
 
-#### v0.2.8 (2017-09-18)
+#### 0.2.8 (2017-09-18)
 
 - Add caching strategy (using temp folder with saving touch-keys)
 - Fix typo in v0.2.7
