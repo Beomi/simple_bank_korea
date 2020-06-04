@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import os
 
 REQ_FILE = 'requirements.txt'
 VERSION = '0.2.15'

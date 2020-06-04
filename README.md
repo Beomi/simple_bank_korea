@@ -87,10 +87,13 @@ for trs in transaction_list:
 
 ## Update Log
 
+#### 0.2.15 (2020-06-04)
+
+- HotFix bugs on `setup.py`
+
 #### 0.2.14 (2020-06-04)
 
 - Fix bugs #4: (downloaded) phantomJS permission error
-- 
 
 #### 0.2.13 (2020-06-04)
 
