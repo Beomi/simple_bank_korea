@@ -87,6 +87,11 @@ for trs in transaction_list:
 
 ## Update Log
 
+#### v0.2.13 (2020-06-04)
+
+- Fix bugs when downloading phantomjs.
+    - Fix affects on Linux and macOS only.
+
 #### v0.2.10 (2017-11-11)
 
 - Hot-fix: implicitly import to explicit relevant import to prevent `ImportError`

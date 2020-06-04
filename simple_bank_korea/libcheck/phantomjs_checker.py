@@ -15,6 +15,7 @@ def get_phantomjs_path(phantomjs_path=None):
     # if phantomjs_path is provided, use it as PATH
     if phantomjs_path:
         return phantomjs_path
+
     # Download Phantomjs Binary if not exist
     def download_phantomjs(filename):
         # Download PhantomJS Binary
@@ -36,7 +37,7 @@ def get_phantomjs_path(phantomjs_path=None):
         return 'phantomjs'
     except WebDriverException as e:
         # No 'phantomjs' in PATH
-        if not 'PATH' in str(e):
+        if 'PATH' not in str(e):
             raise e
         os_name = platform.system()
         if os_name.lower() == 'windows':
@@ -57,21 +58,21 @@ def get_phantomjs_path(phantomjs_path=None):
                             'Download Link: http://phantomjs.org/download.html'.format(os_name))
 
         if filename.endswith('zip'):
-            foldername = filename.replace('.zip', '')
+            folder_name = filename.replace('.zip', '')
             file = zipfile.ZipFile(file_path)
             try:
-                file.extract(foldername + '/bin/phantomjs', TMP_DIR)
-                return os.path.join(TMP_DIR, 'phantomjs')
+                file.extract(folder_name + '/bin/phantomjs', TMP_DIR)
+                return os.path.join(TMP_DIR, folder_name + '/bin/phantomjs')
             except KeyError as e:
-                if not 'windows' in str(e):
+                if 'windows' not in str(e):
                     raise e
-                file.extract(foldername + '/bin/phantomjs.exe', TMP_DIR)
+                file.extract(folder_name + '/bin/phantomjs.exe', TMP_DIR)
                 return os.path.join(TMP_DIR, 'phantomjs.exe')
         elif filename.endswith('tar.bz2'):
-            foldername = filename.replace('.tar.bz2', '')
+            folder_name = filename.replace('.tar.bz2', '')
             file = tarfile.open(file_path, 'r:bz2')
-            file.extract(foldername + '/bin/phantomjs', TMP_DIR)
-            return os.path.join(TMP_DIR, 'phantomjs')
+            file.extract(folder_name + '/bin/phantomjs', TMP_DIR)
+            return os.path.join(TMP_DIR, folder_name + '/bin/phantomjs')
         else:
             raise Exception('File Name is not zip or tar.bz2')
 
